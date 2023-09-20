@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2"
 const productSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -22,14 +23,14 @@ const productSchema = new mongoose.Schema({
     images:{
         type:String,
     },
-    // categoryId: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "Category",
-    // }
+    categoryId: {
+        type: mongoose.Types.ObjectId,
+        ref: "Category",
+    }
     
-})
+},{timestamps:true, versionKey:false})
 
-// productSchema.plugin(mongoosePaginate)
+productSchema.plugin(mongoosePaginate)
 
 
-export default mongoose.model("Product", productSchema)
+export default mongoose.model("Products", productSchema)

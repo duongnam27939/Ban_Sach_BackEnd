@@ -1,4 +1,5 @@
 import Products from "../model/products";
+import Category from "../model/category";
 
 
 
@@ -20,6 +21,19 @@ export const getAll = async (req, res) => {
 export const create = async (req, res) => {
     try {
         const products = await Products.create(req.body)
+
+        await Category.findByIdAndUpdate(products.categoryId, {
+            $addToSet: {
+                products: products._id,
+            },
+        });
+        if (products.length === 0) {
+            return res.status(200).json({
+                message: "Không thêm được sản phẩm",
+            });
+        }
+
+
         return res.status(200).json({
             message: "thêm sản phẩm thành công",
             products
