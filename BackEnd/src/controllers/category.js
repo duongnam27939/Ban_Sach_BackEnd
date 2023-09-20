@@ -1,7 +1,16 @@
 import Category from "../model/category";
+import { categorySchema } from "../schema/category";
 
 export const create = async (req, res) => {
     try {
+
+        const { error } = categorySchema.validate(req.body);
+        if (error) {
+          return res.status(400).json({
+            message: error.details.map((err) => err.message),
+          });
+        }
+    
         const category = await Category.create(req.body);
         if (category.length === 0) {
             return res.status(201).json({
@@ -54,6 +63,15 @@ export const get = async (req, res) => {
 
 export const updata = async (req, res) => {
     try {
+
+        const { error } = categorySchema.validate(req.body);
+        if (error) {
+          return res.status(400).json({
+            message: error.details.map((err) => err.message),
+          });
+        }
+    
+
         const category = await Category.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
         if (category.length === 0) {
             return res.status(201).json({
