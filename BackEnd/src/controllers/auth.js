@@ -2,7 +2,7 @@ import Auth from "../model/auth";
 import bcrypt  from "bcryptjs"
 
 import jwt from "jsonwebtoken"
-import {  signupSchema } from "../schema/auth";
+import { signinSchema, signupSchema } from "../schema/auth";
 
 export const signup = async (req, res) => {
     try {
@@ -44,6 +44,45 @@ export const signup = async (req, res) => {
 };
 
 
+export const signin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const { error } = signinSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            return res.status(400).json({
+                message: error.details.map((err) => err.message),
+            });
+        }
 
+        const auth = await Auth.findOne({ email });
+        if (!auth) {
+            return res.status(400).json({
+                message: "Email không tồn tại",
+            });
+        }
+
+
+        const isMatch = await bcrypt.compare(password, auth.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Mật khẩu không đúng",
+            });
+        }
+
+        const token = jwt.sign({ id: auth._id }, "123456", { expiresIn: "1d" });
+
+        auth.password = undefined;
+
+        return res.status(200).json({
+            message: "Đăng nhập thành công",
+            accessToken: token,
+            auth,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message,
+        });
+    }
+};
 
 
