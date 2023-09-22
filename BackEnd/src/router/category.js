@@ -1,11 +1,11 @@
 import express from 'express'
-import { create, get, getAll, remove, updata } from '../controllers/category'
+import { create, get, getAll, remove, update } from '../controllers/category'
 
 const router = express.Router()
 router.get('/category',getAll)
 router.get('/category/:id',get)
 router.post('/category',create)
-router.put('/category/:id',updata)
+router.patch('/category/:id',update)
 router.delete('/category/:id',remove)
 
 

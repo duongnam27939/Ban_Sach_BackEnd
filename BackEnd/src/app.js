@@ -3,11 +3,14 @@ import mongoose from "mongoose";
 import productsRouter from '../src/router/products'
 import categoryRouter from '../src/router/category'
 import authRouter from '../src/router/auth'
+import cors from 'cors'
 
 
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 app.use('/api',productsRouter)
 app.use('/api/',categoryRouter)
 app.use('/api/',authRouter)

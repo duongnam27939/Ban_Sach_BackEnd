@@ -61,30 +61,27 @@ export const get = async (req, res) => {
 }
 
 
-export const updata = async (req, res) => {
+export const update = async (req, res) => {
+
     try {
-
-        const { error } = categorySchema.validate(req.body);
-        if (error) {
-          return res.status(400).json({
-            message: error.details.map((err) => err.message),
-          });
-        }
-    
-
-        const category = await Category.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
+        const category = await Category.findOneAndUpdate({ _id: req.params.id }, req.body, {
+            new: true,
+        });
         if (category.length === 0) {
-            return res.status(201).json({
-                message: "Cập nhập danh mục không thành công",
+            return res.status(200).json({
+                message: "Cập nhật danh muc không thành công",
             });
         }
-        return res.json(category)
+        return res.status(200).json({
+            message: "Cập nhật danh muc thành công",
+            category,
+        });
     } catch (error) {
         return res.status(404).json({
-            message: error.message
-        })
+            message: error,
+        });
     }
-}
+};
 
 
 
