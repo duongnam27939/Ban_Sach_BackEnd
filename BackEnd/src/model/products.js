@@ -1,7 +1,9 @@
 
+import { number, string } from "joi";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 const productSchema = new mongoose.Schema({
+    
     name:{
         type:String,
     },
@@ -11,7 +13,7 @@ const productSchema = new mongoose.Schema({
     price:{
         type:Number,
     },
-    sale_off:{
+    sale:{
         type:Number,
     },
     description:{

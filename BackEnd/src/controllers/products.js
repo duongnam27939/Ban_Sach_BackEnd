@@ -2,9 +2,10 @@ import Products from "../model/products";
 import { productSchema } from "../schema/products";
 import Category from "../model/category";
 
+
 export const getAll = async (req, res) => {
   try {
-    const products = await Products.find();
+    const products = await Products.find().populate('categoryId');
     return res.status(200).json({
       products,
     });
@@ -14,6 +15,28 @@ export const getAll = async (req, res) => {
     });
   }
 };
+
+// export const getAll = async (req, res) => {
+//   try {
+
+//       const products = await Products.find();
+//       if (products.length === 0) {
+//           return res.status(200).json({
+//               message: "Không có dữ liệu",
+//           });
+//       }
+//       return res.status(200).json({
+//           message: "Danh sách sản phẩm",
+//           products,
+//       });
+
+//   } catch (error) {
+//       return res.status(400).json({
+//           message: error.message,
+//       });
+
+//   }
+// }
 
 export const create = async (req, res) => {
   try {
@@ -74,12 +97,12 @@ export const getById = async (req, res) => {
   }
 };
 export const update = async (req, res) => {
-  const { error } = productSchema.validate(req.body);
-  if (error) {
-    return res.status(400).json({
-      message: error.details.map((err) => err.message),
-    });
-  }
+  // const { error } = productSchema.validate(req.body);
+  // if (error) {
+  //   return res.status(400).json({
+  //     message: error.details.map((err) => err.message),
+  //   });
+  // }
   try {
     const products = await Products.findOneAndUpdate(
       { _id: req.params.id },
@@ -98,3 +121,5 @@ export const update = async (req, res) => {
     });
   }
 };
+
+
