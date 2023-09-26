@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import productsRouter from '../src/router/products'
 import categoryRouter from '../src/router/category'
 import authRouter from '../src/router/auth'
+import userRouter from '../src/router/user'
 import cors from 'cors'
 
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use('/api',productsRouter)
 app.use('/api/',categoryRouter)
 app.use('/api/',authRouter)
+app.use('/api/',userRouter)
 
 
 
