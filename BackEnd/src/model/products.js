@@ -25,6 +25,15 @@ const productSchema = new mongoose.Schema({
     images:{
         type:String,
     },
+    tags:{
+        type:String,
+    },
+    discount:{
+        type:Number,
+    },
+    status:{
+        type:String
+    },
     categoryId: {
         type: mongoose.Types.ObjectId,
         ref: "Category",

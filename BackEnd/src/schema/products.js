@@ -8,5 +8,8 @@ export const productSchema = joi.object({
   description: joi.string().required("Description là trường bắt buộc"),
   quantity: joi.number().required("Quantity không được để trống"),
   images: joi.string().required("Images không được bỏ trống"),
+  tags:joi.string().required("Tags không được để trống"),
+  discount:joi.number().required("Discount không được để trống"),
+  status:joi.string().required("status không được để trống"),
   categoryId: joi.string().required("categoryId là trường dữ liệu bắt buộc"),
 });

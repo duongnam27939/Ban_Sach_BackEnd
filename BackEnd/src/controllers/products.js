@@ -86,7 +86,8 @@ export const remove = async (req, res) => {
 
 export const getById = async (req, res) => {
   try {
-    const products = await Products.findById(req.params.id);
+    const products = await Products.findById(req.params.id).populate("categoryId");
+    console.log(products);
     return res.status(200).json({
       products,
     });
@@ -97,12 +98,7 @@ export const getById = async (req, res) => {
   }
 };
 export const update = async (req, res) => {
-  // const { error } = productSchema.validate(req.body);
-  // if (error) {
-  //   return res.status(400).json({
-  //     message: error.details.map((err) => err.message),
-  //   });
-  // }
+
   try {
     const products = await Products.findOneAndUpdate(
       { _id: req.params.id },
