@@ -72,7 +72,8 @@ export const remove = async (req, res) => {
     try {
         const data = await Category.findByIdAndDelete({ _id: req.params.id })
         return res.status(201).json({
-            message: "Xóa sản phẩm thành công"
+            message: "Xóa sản phẩm thành công",
+            data
         })
     } catch (error) {
         return res.status(400).json({

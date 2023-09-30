@@ -16,27 +16,6 @@ export const getAll = async (req, res) => {
   }
 };
 
-// export const getAll = async (req, res) => {
-//   try {
-
-//       const products = await Products.find();
-//       if (products.length === 0) {
-//           return res.status(200).json({
-//               message: "Không có dữ liệu",
-//           });
-//       }
-//       return res.status(200).json({
-//           message: "Danh sách sản phẩm",
-//           products,
-//       });
-
-//   } catch (error) {
-//       return res.status(400).json({
-//           message: error.message,
-//       });
-
-//   }
-// }
 
 export const create = async (req, res) => {
   try {
@@ -87,16 +66,25 @@ export const remove = async (req, res) => {
 export const getById = async (req, res) => {
   try {
     const products = await Products.findById(req.params.id).populate("categoryId");
-    console.log(products);
+    if (products.length === 0) {
+      return res.status(202).json({
+        message:"Không có dữ liệu",
+      });
+    }
+    
     return res.status(200).json({
+      message:"danh sách getById",
       products,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error,
+    return res.status(400).json({
+      message: error.message,
     });
   }
 };
+
+
+
 export const update = async (req, res) => {
 
   try {
