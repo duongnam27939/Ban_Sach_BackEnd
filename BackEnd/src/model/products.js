@@ -1,5 +1,3 @@
-
-import { number, string } from "joi";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 const productSchema = new mongoose.Schema({
@@ -37,7 +35,7 @@ const productSchema = new mongoose.Schema({
     categoryId: {
         type: mongoose.Types.ObjectId,
         ref: "Category",
-    }
+    },
     
 },{timestamps:true, versionKey:false})
 

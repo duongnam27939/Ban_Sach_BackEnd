@@ -21,5 +21,6 @@ app.use('/api/',searchRouter)
 
 
 
+
 mongoose.connect("mongodb://127.0.0.1:27017/DATT")
 export const viteNodeApp = app;
