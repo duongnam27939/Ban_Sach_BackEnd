@@ -26,9 +26,6 @@ const productSchema = new mongoose.Schema({
     tags:{
         type:String,
     },
-    discount:{
-        type:Number,
-    },
     status:{
         type:String
     },
