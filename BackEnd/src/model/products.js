@@ -29,6 +29,21 @@ const productSchema = new mongoose.Schema({
     status:{
         type:String
     },
+    company:{
+        type:String
+    },
+    numberpages:{
+        type:Number
+    },
+    size:{
+        type:String
+    },
+    publish:{
+        type:String
+    },
+    mass:{
+        type:Number,
+    },
     categoryId: {
         type: mongoose.Types.ObjectId,
         ref: "Category",
