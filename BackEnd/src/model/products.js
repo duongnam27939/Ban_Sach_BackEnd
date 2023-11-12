@@ -1,57 +1,61 @@
 import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2"
-const productSchema = new mongoose.Schema({
-    
-    name:{
-        type:String,
+import mongoosePaginate from "mongoose-paginate-v2";
+const productSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
     },
-    author:{
-        type: String,
+    author: {
+      type: String,
     },
-    price:{
-        type:Number,
+    price: {
+      type: Number,
     },
-    sale:{
-        type:Number,
+    sale: {
+      type: Number,
     },
-    description:{
-        type:String,
+    description: {
+      type: String,
     },
-    quantity:{
-        type:Number,
+    quantity: {
+      type: Number,
     },
-    images:{
-        type:String,
+    images: {
+      type: String,
     },
-    tags:{
-        type:String,
+    tags: {
+      type: String,
     },
-    status:{
-        type:String
+    status: {
+      type: String,
     },
-    company:{
-        type:String
+    company: {
+      type: String,
     },
-    numberpages:{
-        type:Number
+    numberpages: {
+      type: Number,
     },
-    size:{
-        type:String
+    size: {
+      type: String,
     },
-    publish:{
-        type:String
+    publish: {
+      type: String,
     },
-    mass:{
-        type:Number,
+    mass: {
+      type: Number,
     },
     categoryId: {
-        type: mongoose.Types.ObjectId,
-        ref: "Category",
+      type: mongoose.Types.ObjectId,
+      ref: "Category",
     },
-    
-},{timestamps:true, versionKey:false})
+    cartId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Cart",
+    },
+  },
+  { timestamps: true, versionKey: false }
+);
 
-productSchema.plugin(mongoosePaginate)
+productSchema.plugin(mongoosePaginate);
 
-
-export default mongoose.model("Products", productSchema)
+export default mongoose.model("Products", productSchema);
