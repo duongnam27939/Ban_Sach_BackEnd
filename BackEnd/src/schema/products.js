@@ -14,5 +14,6 @@ export const productSchema = joi.object({
   numberpages:joi.number().required("numberpages không được bỏ trống"),
   size:joi.string().required("size không được bỏ trống"),
   publish:joi.string().required("publish không được bỏ trống"),
+  mass:joi.number().required("mass không được bỏ trống"),
   categoryId: joi.string().required("categoryId là trường dữ liệu bắt buộc"),
 });
