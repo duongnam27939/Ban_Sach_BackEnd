@@ -12,16 +12,16 @@ export const searchByNameAndDescription = async (req, res) => {
       ],
     });
     if (!products || products.length === 0) {
-      return res.status(404).json({
+      return res.json({
         message: "Không tìm thấy sản phẩm với từ khóa này",
       });
     }
 
-    return res.status(200).json({
+    return res.json({
       products,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.json({
       message: error.message,
     });
   }
@@ -34,15 +34,15 @@ export const searchUserByNameAndEmail = async (req, res) => {
       $or: [{ name: { $regex: keyword, $options: "i" } }],
     });
     if (!products || products.length === 0) {
-      return res.status(404).json({
+      return res.json({
         message: "Không tìm thấy sản phẩm với từ khóa này",
       });
     }
-    return res.status(200).json({
+    return res.json({
       products,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.json({
       message: error.message,
     });
   }
@@ -56,6 +56,6 @@ export const searchNameCategory = async (req, res) => {
         res.json(categories);
       } catch (error) {
         console.error('Error searching categories', error);
-        res.status(500).json({ error: 'Server error' });
+        res.json({ error: 'Server error' });
       }
 };

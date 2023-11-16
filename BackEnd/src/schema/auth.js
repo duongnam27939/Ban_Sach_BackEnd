@@ -1,35 +1,53 @@
-import joi from "joi";
+// import joi from "joi";
 
-export const signupSchema = joi.object({
-    name: joi.string().required().messages({
-        "string.empty": "Tên không được để trống",
-        "any.required": "Trường tên là bắt buộc",
-    }),
-    email: joi.string().email().required().messages({
-        "string.empty": "Email không được để trống",
-        "any.required": "Trường email là bắt buộc",
-    }),
-    password: joi.string().required().min(6).messages({
-        "string.empty": "Mật khẩu không được để trống",
-        "string.min": "Mật khẩu phải có ít nhất {#limit} ký tự",
-        "any.require": "Trường mật khẩu là bắt buộc",
-    }),
-    confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
-        "string.empty": "Xác nhận mật khẩu không được để trống",
-        "any.only": "Xác nhận mật khẩu không khớp",
-        "any.required": "Trường xác nhận mật khẩu là bắt buộc",
-    }),
+// export const signupSchema = joi.object({
+//   name: joi.string().required().messages({
+//     "string.empty": "Tên không được để trống",
+//     "any.required": "Trường tên là bắt buộc",
+//   }),
+//   email: joi.string().email().required().messages({
+//     "string.empty": "Email không được để trống",
+//     "any.required": "Trường email là bắt buộc",
+//   }),
+//   password: joi.string().required().min(6).messages({
+//     "string.empty": "Mật khẩu không được để trống",
+//     "string.min": "Mật khẩu phải có ít nhất {#limit} ký tự",
+//     "any.require": "Trường mật khẩu là bắt buộc",
+//   }),
+//   confirmPassword: joi.string().valid(joi.ref("password")).required().messages({
+//     "string.empty": "Xác nhận mật khẩu không được để trống",
+//     "any.only": "Xác nhận mật khẩu không khớp",
+//     "any.required": "Trường xác nhận mật khẩu là bắt buộc",
+//   }),
+// });
+
+// export const signinSchema = joi.object({
+//   email: joi.string().email().required().messages({
+//     "string.empty": "Email không được để trống",
+//     "any.required": "Trường email là bắt buộc",
+//   }),
+//   password: joi.string().required().min(6).messages({
+//     "string.empty": "Mật khẩu không được để trống",
+//     "string.min": "Mật khẩu phải có ít nhất {#limit} ký tự",
+//     "any.require": "Trường mật khẩu là bắt buộc",
+//   }),
+// });
+
+import yup from "yup";
+
+const signupSchema = new yup.object({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Mật khẩu phải trùng khớp")
+    .required(),
 });
 
-
-export const signinSchema = joi.object({
-    email: joi.string().email().required().messages({
-        "string.empty": "Email không được để trống",
-        "any.required": "Trường email là bắt buộc",
-    }),
-    password: joi.string().required().min(6).messages({
-        "string.empty": "Mật khẩu không được để trống",
-        "string.min": "Mật khẩu phải có ít nhất {#limit} ký tự",
-        "any.require": "Trường mật khẩu là bắt buộc",
-    }),
+const signinSchema = new yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
 });
+
+export { signupSchema, signinSchema };

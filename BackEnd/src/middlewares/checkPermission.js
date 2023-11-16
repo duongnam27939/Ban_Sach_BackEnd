@@ -3,7 +3,7 @@ import Auth from "../model/auth";
 
 export const checkPermission = async (req, res, next) => {
     if (!req.headers.authorization) {
-        return res.status(404).json({
+        return res.json({
             message: 'bạn chưa đăng nhập',
         })
     }
@@ -16,7 +16,7 @@ export const checkPermission = async (req, res, next) => {
         }
         const auth = await Auth.findById(decoded.id);
         if (auth.role !== "admin") {
-            return res.status(404).json({
+            return res.json({
                 message: "Bạn không có quyền truy cập tài nguyên này",
             });
         }
