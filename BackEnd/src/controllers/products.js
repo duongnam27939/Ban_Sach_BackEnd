@@ -5,7 +5,7 @@ import Category from "../model/category";
 
 export const getAll = async (req, res) => {
   try {
-    const products = await Products.find().populate('categoryId');
+    const products = await Products.find().populate('categoryId',"feedbacks");
     return res.json({
       products,
     });
@@ -65,7 +65,13 @@ export const remove = async (req, res) => {
 
 export const getById = async (req, res) => {
   try {
-    const products = await Products.findById(req.params.id).populate("categoryId");
+    const products = await Products.findById(req.params.id).populate("categoryId").populate({
+      path: 'feedbacks',
+      populate: {
+        path: 'userId',
+        model: 'Auth'
+      }
+    });
     if (products.length === 0) {
       return res.json({
         message:"Không có dữ liệu",
