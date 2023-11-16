@@ -48,10 +48,13 @@ const productSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Category",
     },
-    cartId: {
-      type: mongoose.Types.ObjectId,
-      ref: "Cart",
-    },
+    feedbacks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Feedback",
+        autopopulate: true,
+      },
+    ],
   },
   { timestamps: true, versionKey: false }
 );
