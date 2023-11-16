@@ -6,11 +6,11 @@ import Category from "../model/category";
 export const getAll = async (req, res) => {
   try {
     const products = await Products.find().populate('categoryId');
-    return res.status(200).json({
+    return res.json({
       products,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.json({
       message: error,
     });
   }
@@ -21,7 +21,7 @@ export const create = async (req, res) => {
   try {
     const { error } = productSchema.validate(req.body);
     if (error) {
-      return res.status(400).json({
+      return res.json({
         message: error.details.map((err) => err.message),
       });
     }
@@ -34,17 +34,17 @@ export const create = async (req, res) => {
       },
     });
     if (products.length === 0) {
-      return res.status(200).json({
+      return res.json({
         message: "Không thêm được sản phẩm",
       });
     }
 
-    return res.status(200).json({
+    return res.json({
       message: "thêm sản phẩm thành công",
       products,
     });
   } catch ({ errors }) {
-    return res.status(500).json({
+    return res.json({
       message: errors,
     });
   }
@@ -53,11 +53,11 @@ export const create = async (req, res) => {
 export const remove = async (req, res) => {
   try {
     const products = await Products.findByIdAndDelete({ _id: req.params.id });
-    return res.status(200).json({
+    return res.json({
       message: "Xóa sản phẩm thành công",
     });
   } catch (errors) {
-    return res.status(500).json({
+    return res.json({
       message: errors,
     });
   }
@@ -67,17 +67,17 @@ export const getById = async (req, res) => {
   try {
     const products = await Products.findById(req.params.id).populate("categoryId");
     if (products.length === 0) {
-      return res.status(202).json({
+      return res.json({
         message:"Không có dữ liệu",
       });
     }
     
-    return res.status(200).json({
+    return res.json({
       message:"danh sách getById",
       products,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.json({
       message: error.message,
     });
   }
@@ -94,13 +94,13 @@ export const update = async (req, res) => {
       { new: true }
     );
     if (products.length === 0) {
-      return res.status(200).json({
+      return res.json({
         message: "Cập nhật sản phẩm không thành công",
       });
     }
     return res.json(products);
   } catch (error) {
-    return res.status(400).json({
+    return res.json({
       message: error.message,
     });
   }

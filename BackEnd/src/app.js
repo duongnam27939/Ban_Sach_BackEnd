@@ -5,6 +5,7 @@ import categoryRouter from '../src/router/category'
 import authRouter from '../src/router/auth'
 import userRouter from '../src/router/user'
 import searchRouter from '../src/router/search'
+import cartRouter from '../src/router/cart'
 import cors from 'cors'
 
 
@@ -18,6 +19,7 @@ app.use('/api/',categoryRouter)
 app.use('/api/',authRouter)
 app.use('/api/',userRouter)
 app.use('/api/',searchRouter)
+app.use('/api/',cartRouter)
 
 
 

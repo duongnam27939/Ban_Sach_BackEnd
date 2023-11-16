@@ -22,7 +22,7 @@ const myCart = async (req, res) => {
           path: 'cartItems',
           populate: {
             path: 'productId',
-            model: 'Book'
+            model: 'Products'
           }
         })
       return res.json({
