@@ -7,6 +7,7 @@ import userRouter from '../src/router/user'
 import searchRouter from '../src/router/search'
 import cartRouter from '../src/router/cart'
 import feedbackRouter from '../src/router/feedback'
+import orderRouter from '../src/router/order'
 import cors from 'cors'
 
 
@@ -22,6 +23,7 @@ app.use('/api/',userRouter)
 app.use('/api/',searchRouter)
 app.use('/api/',cartRouter)
 app.use('/api/',feedbackRouter)
+app.use('/api/',orderRouter)
 
 
 
